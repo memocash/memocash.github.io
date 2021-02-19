@@ -10,8 +10,8 @@ var ExampleParentKey = {
         $fundApiClear: null
     },
     Const: {
-        WebHost: "https://memo.cash",
-        ApiHost: "https://api.memo.cash"
+        WebHost: "https://beta.memo.cash",
+        ApiHost: "https://beta-api.memo.cash"
     },
     /** @type {[MemoApiTx]} */
     Txs: {
