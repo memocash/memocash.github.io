@@ -1,0 +1,138 @@
+body {
+    padding-top: 50px;
+}
+
+a {
+    cursor: pointer;
+}
+
+.main-body {
+    padding-top: 40px;
+}
+
+.inline {
+    display: inline-block;
+    width: unset;
+    min-width: unset;
+}
+
+form.inline {
+    margin-bottom: 0;
+}
+
+.form-control.inline {
+    width: 50px;
+}
+
+#site-wrapper.active {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+#inner-site-wrapper {
+    position: relative;
+    height: 100%;
+}
+
+#inner-site-wrapper .site-header-spacer {
+    height: 60px;
+}
+
+body.mobile-app #inner-site-wrapper .site-header-spacer {
+    height: 5px;
+}
+
+#site-wrapper-cover.active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+#site-modal-wrapper {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+#site-modal-wrapper > .container {
+    margin-top: 120px;
+    margin-bottom: 100px;
+}
+
+#site-modal-wrapper > .container .panel {
+    margin: 0;
+}
+
+#site-modal-wrapper > .container .panel-heading {
+    min-height: 38px;
+}
+
+#site-modal-wrapper > .container .panel-heading.panel-heading-no-title {
+    min-height: auto;
+    padding: 0;
+    border: none;
+}
+
+#site-modal-wrapper > .container .panel-heading.panel-heading-no-title .close {
+    margin-top: -35px;
+    font-size: 28px;
+    opacity: 0.4;
+}
+
+#site-modal-wrapper > .container .panel-heading.panel-heading-no-title .close:hover,
+#site-modal-wrapper > .container .panel-heading.panel-heading-no-title .close:active,
+#site-modal-wrapper > .container .panel-heading.panel-heading-no-title .close:focus {
+    opacity: 0.75;
+}
+
+.panel-heading .alias {
+    font-style: italic;
+    font-size: 12px;
+}
+
+#main-modal {
+    padding: 0;
+}
+
+.row.row-striped {
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.row.row-striped:first-child {
+    border-bottom: 1px solid #e0e0e0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+}
+
+.row.row-striped:not(:first-child) {
+    border-top: 1px solid #e0e0e0;
+}
+
+.row.row-striped:nth-child(2n+1) {
+    background: #fff;
+}
+
+.row.row-striped:nth-child(2n) {
+    background: #f8f8f8;
+}
+
+.reply-container .panel.panel-default {
+    margin: 20px -10px 0 0;
+}
+
+.footer {
+    text-align: center;
+    color: #888;
+}

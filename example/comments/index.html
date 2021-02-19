@@ -1,0 +1,88 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memo Example - Comments</title>
+    <script src="../../lib/jquery.min.js"></script>
+    <script src="../../lib/bootstrap.min.js"></script>
+    <script src="../../lib/jmemo.min.js"></script>
+    <script src="./js/init.js"></script>
+    <script src="./js/modal.js"></script>
+    <script src="./js/template.js"></script>
+    <script src="./js/user.js"></script>
+    <script src="./js/api.js"></script>
+    <script src="./js/posts.js"></script>
+    <script src="./js/tx.js"></script>
+    <script src="./config.js"></script>
+    <link rel="stylesheet" href="../../lib/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./comments.css"/>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Memo Example - Comments</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div id="navbar-collapse" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item">
+                    <a id="user-info"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id="site-wrapper">
+    <div id="inner-site-wrapper">
+        <div class="container main-body">
+            <h2>Comments!</h2>
+            <br>
+            <form id="comment-form">
+                <div class="form-group row">
+                    <label for="comment" class="col-form-label col-sm-3">Comment</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" name="comment" id="comment"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <input class="btn btn-sm btn-primary" type="submit" value="Post"/>
+                    </div>
+                </div>
+            </form>
+            <br>
+            <div id="comments"></div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-xs-12 footer">
+                    <hr/>
+                    <p>
+                        &copy; Memo Technology, Inc &middot; All Rights Reserved
+                    </p>
+                    <p>
+                        <a href="../../#examples">Docs</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <script>
+            ExampleComments.User.InitWallet($("#mnemonic"));
+            ExampleComments.User.InitInfo();
+            ExampleComments.Posts.SetComments($("#comments"), ExampleComments.Const.ModAddresses);
+            ExampleComments.Posts.Load();
+            ExampleComments.Posts.Form($("#comment-form"));
+        </script>
+    </div>
+</div>
+<div id="site-wrapper-cover"></div>
+<div id="site-modal-wrapper"></div>
+</body>
+</html>

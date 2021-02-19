@@ -1,0 +1,47 @@
+<div>
+    <a class="anchor" id="api-tx"></a>
+    <h2>
+        Transaction
+        <a class="anchor-link" href="#api-tx">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h2>
+</div>
+
+<div>
+    <a class="anchor" id="api-tx-broadcast"></a>
+    <h3>
+        Broadcast Transaction
+        <a class="anchor-link" href="#api-tx-broadcast">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/tx/broadcast</code>
+    </p>
+    <pre>txRaw=0100000001007150dd4218e128db9009f7472033652cba565e45f84f01aca33edd66a222be010000006b483045022100fe44b94c137975c522c9acc418593a86870a73c74656f9a9e4c62031a558cdec0220240d0879162696292e9118052e8c751408425642d1d31c170f7a5acc430c75e5012103e443fce8e4f6a4d19b4d8ddce4c2f98f42868c03743b80400c3b8227855cf1ffffffffff0200000000000000000e6a026d0c0474657374047465737440250000000000001976a9145205a214836e725c98d10512a04344d629e5f21188ac00000000</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">{
+    tx_hash: "dc04902b04ce051948beacbb2740d9a80b3ccfd8d088b67833159268400bb8ef..."
+}</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-tx-wait"></a>
+    <h3>
+        Wait Transaction
+        <a class="anchor-link" href="#api-tx-wait">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/tx/wait</code>
+    </p>
+    <pre>txHash=dc04902b04ce051948beacbb2740d9a80b3ccfd8d088b67833159268400bb8ef</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">dc04902b04ce051948beacbb2740d9a80b3ccfd8d088b67833159268400bb8ef</code></pre>
+</div>

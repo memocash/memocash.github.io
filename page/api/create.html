@@ -1,0 +1,315 @@
+<div>
+    <a class="anchor" id="api-create"></a>
+    <h2>
+        Create
+        <a class="anchor-link" href="#api-create">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h2>
+</div>
+
+<div>
+    <a class="anchor" id="api-create-send"></a>
+    <h3>
+        Send
+        <a class="anchor-link" href="#api-create-send">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/create/send</code>
+    </p>
+    <pre>apiToken=0166e5525a96e38c0e559cef889d0f2e
+apiSecret=648425dc1199e3d506c977039f10171bafd8ccee3a584276400ca8afb5e6add5
+message=Send message
+quantity=10000
+recipient=12FtodbaKJ2xRMi5zmsMSpSaQamuMMkdLa
+address=15w9TL4vPFe13sQ5f4YnWbARjdqjoiZT4e</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">{
+    "hash": "93c6dd52a...",
+    "raw": "0100000001fc6c4..."
+}</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-create-post"></a>
+    <h3>
+        Post
+        <a class="anchor-link" href="#api-create-post">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/create/post</code>
+    </p>
+    <pre>apiToken=0166e5525a96e38c0e559cef889d0f2e
+apiSecret=648425dc1199e3d506c977039f10171bafd8ccee3a584276400ca8afb5e6add5
+message=Test
+address=15w9TL4vPFe13sQ5f4YnWbARjdqjoiZT4e</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">{
+    "hash": "93c6dd52a...",
+    "raw": "0100000001fc6c4..."
+}</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-create-reply"></a>
+    <h3>
+        Reply
+        <a class="anchor-link" href="#api-create-reply">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/create/reply</code>
+    </p>
+    <pre>apiToken=0166e5525a96e38c0e559cef889d0f2e
+apiSecret=648425dc1199e3d506c977039f10171bafd8ccee3a584276400ca8afb5e6add5
+txHash=dc04902b04ce051948beacbb2740d9a80b3ccfd8d088b67833159268400bb8ef
+message=Test reply
+address=12FtodbaKJ2xRMi5zmsMSpSaQamuMMkdLa</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">{
+    "hash": "93c6dd52a...",
+    "raw": "0100000001fc6c4..."
+}</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-create-like"></a>
+    <h3>
+        Like
+        <a class="anchor-link" href="#api-create-like">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/create/like</code>
+    </p>
+    <pre>apiToken=0166e5525a96e38c0e559cef889d0f2e
+apiSecret=648425dc1199e3d506c977039f10171bafd8ccee3a584276400ca8afb5e6add5
+likeTxHash=dc04902b04ce051948beacbb2740d9a80b3ccfd8d088b67833159268400bb8ef
+tip=2500
+address=12FtodbaKJ2xRMi5zmsMSpSaQamuMMkdLa</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">{
+    "hash": "93c6dd52a...",
+    "raw": "0100000001fc6c4..."
+}</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-create-token-send"></a>
+    <h3>
+        Token Send
+        <a class="anchor-link" href="#api-create-token-send">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/create/token-send</code>
+    </p>
+    <pre>apiToken=0166e5525a96e38c0e559cef889d0f2e
+apiSecret=648425dc1199e3d506c977039f10171bafd8ccee3a584276400ca8afb5e6add5
+token=dc04902b04ce051948beacbb2740d9a80b3ccfd8d088b67833159268400bb8ef
+recipient=15w9TL4vPFe13sQ5f4YnWbARjdqjoiZT4e
+quantity=10000
+address=12FtodbaKJ2xRMi5zmsMSpSaQamuMMkdLa</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">{
+    "hash": "93c6dd52a...",
+    "raw": "0100000001fc6c4..."
+}</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-create-link-request"></a>
+    <h3>
+        Link Request
+        <a class="anchor-link" href="#api-create-link-request">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/create/link-request</code>
+    </p>
+    <pre>apiToken=0166e5525a96e38c0e559cef889d0f2e
+apiSecret=648425dc1199e3d506c977039f10171bafd8ccee3a584276400ca8afb5e6add5
+parentAddress=15w9TL4vPFe13sQ5f4YnWbARjdqjoiZT4e
+address=12FtodbaKJ2xRMi5zmsMSpSaQamuMMkdLa</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">{
+    "hash": "93c6dd52a...",
+    "raw": "0100000001fc6c4..."
+}</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-create-link-accept"></a>
+    <h3>
+        Link Accept
+        <a class="anchor-link" href="#api-create-link-accept">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/create/link-accept</code>
+    </p>
+    <pre>apiToken=0166e5525a96e38c0e559cef889d0f2e
+apiSecret=648425dc1199e3d506c977039f10171bafd8ccee3a584276400ca8afb5e6add5
+requestTxHash=be22a266dd3ea3ac014ff8455e56ba2c65332047f70990db28e11842dd507100</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">{
+    "hash": "93c6dd52a...",
+    "raw": "0100000001fc6c4..."
+}</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-create-link-finish"></a>
+    <h3>
+        Link Finish
+        <a class="anchor-link" href="#api-create-link-finish">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/create/link-finish</code>
+    </p>
+    <pre>requestTxHash=78a43709e6cfac647e8450c9b6b479c41b157b75367bb1c84bf284addf52e0f8
+apiToken=0166e5525a96e38c0e559cef889d0f2e
+apiTempKey=a22be1903dc09e7226f3bff3274087f240a4f2bb97678e62b16ed0747aaaa788</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">{
+    "hash": "93c6dd52a...",
+    "raw": "0100000001fc6c4..."
+}</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-create-topic-follow"></a>
+    <h3>
+        Topic Follow
+        <a class="anchor-link" href="#api-create-topic-follow">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/create/topic-follow</code>
+    </p>
+    <pre>apiToken=0166e5525a96e38c0e559cef889d0f2e
+apiSecret=648425dc1199e3d506c977039f10171bafd8ccee3a584276400ca8afb5e6add5
+topic=test
+unfollow=false
+address=15w9TL4vPFe13sQ5f4YnWbARjdqjoiZT4e</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">{
+    "hash": "93c6dd52a...",
+    "raw": "0100000001fc6c4..."
+}</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-create-topic-post"></a>
+    <h3>
+        Topic Post
+        <a class="anchor-link" href="#api-create-topic-post">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/create/topic-post</code>
+    </p>
+    <pre>apiToken=0166e5525a96e38c0e559cef889d0f2e
+apiSecret=648425dc1199e3d506c977039f10171bafd8ccee3a584276400ca8afb5e6add5
+topic=test
+message=Test
+address=15w9TL4vPFe13sQ5f4YnWbARjdqjoiZT4e</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">{
+    "hash": "93c6dd52a...",
+    "raw": "0100000001fc6c4..."
+}</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-create-mute"></a>
+    <h3>
+        Mute
+        <a class="anchor-link" href="#api-create-mute">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/create/mute</code>
+    </p>
+    <pre>apiToken=0166e5525a96e38c0e559cef889d0f2e
+apiSecret=648425dc1199e3d506c977039f10171bafd8ccee3a584276400ca8afb5e6add5
+muteAddress=12FtodbaKJ2xRMi5zmsMSpSaQamuMMkdLa
+unmute=false
+address=15w9TL4vPFe13sQ5f4YnWbARjdqjoiZT4e</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">{
+    "hash": "93c6dd52a...",
+    "raw": "0100000001fc6c4..."
+}</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-create-alias"></a>
+    <h3>
+        Alias
+        <a class="anchor-link" href="#api-create-alias">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/create/alias</code>
+    </p>
+    <pre>apiToken=0166e5525a96e38c0e559cef889d0f2e
+apiSecret=648425dc1199e3d506c977039f10171bafd8ccee3a584276400ca8afb5e6add5
+aliasAddress=15w9TL4vPFe13sQ5f4YnWbARjdqjoiZT4e
+alias=Main
+address=15w9TL4vPFe13sQ5f4YnWbARjdqjoiZT4e</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">{
+    "hash": "93c6dd52a...",
+    "raw": "0100000001fc6c4..."
+}</code></pre>
+</div>

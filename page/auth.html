@@ -1,0 +1,101 @@
+<a class="anchor" id="auth"></a>
+<h1 class="page-header">Authentication</h1>
+<ul>
+    <li>
+        <a href="#auth-new">New User</a>
+    </li>
+    <li>
+        <a href="#auth-fund-user">Fund User</a>
+    </li>
+</ul>
+<br>
+
+<a class="anchor" id="auth-new"></a>
+<h2>
+    New User
+    <a class="anchor-link" href="#auth-new">
+        <span class="glyphicon glyphicon-link"></span>
+    </a>
+</h2>
+<ol>
+    <li>
+        Navigate to Memo external auth with necessary parameters
+        <h5>URL</h5>
+        <pre>https://memo.cash/account/link?</pre>
+        <h5>Parameters</h5>
+        <pre>return_url=http://localhost:8080/auth-complete&
+address=12kap...</pre>
+    </li>
+    <li>
+        Click <b>Connect</b> on Memo<br>
+        <ol type="a">
+            <li>
+                Transaction to fund address is created and broadcast
+            </li>
+        </ol>
+    </li>
+    <li>
+        Redirect auth complete
+        <h5>URL</h5>
+        <pre>http://localhost:8080/auth-complete?</pre>
+        <h5>Parameters</h5>
+        <pre>api_token=c97b1a33...
+api_temp_key=dab9b452...
+parent_address=12kap...</pre>
+    </li>
+    <li>
+        Get key
+        <pre>
+<code class="language-javascript">jmemo.Client.Api.Key.Get(api_token, api_temp_key, function (response) {
+    var api_secret = response.secret;
+});</code></pre>
+    </li>
+    <li>
+        Create link request using API (<a href="#api-linking">linking</a>)
+        <pre>
+<code class="language-javascript">jmemo.Client.Link.CreateRequest(api_token, api_secret, address, parent_address, "", function (unsignedTx) {
+    var key = jmemo.Wallet.GetHDChild(mnemonic, jmemo.Wallet.Path.MainAddressPath());
+    var signedTx = jmemo.Wallet.Sign.SignTx(unsignedTx.raw, key);
+    jmemo.Client.Tx.BroadcastAndWait(signedTx.toHex(), function (response) {
+        var requestTxHash = jmemo.Wallet.Util.GetTxRawHash(signedTx.toHex());
+    });
+});
+</code></pre>
+    </li>
+    <li>
+        Complete linking
+        <pre>
+<code class="language-javascript">jmemo.Client.Link.FinishAccept(api_token, api_temp_key, requestTxHash, function (signedTx) {
+    jmemo.Client.Tx.BroadcastAndWait(signedTx.raw);
+});
+</code></pre>
+    </li>
+</ol>
+<br>
+
+<a class="anchor" id="auth-fund-user"></a>
+<h2>
+    Fund User
+    <a class="anchor-link" href="#auth-fund-user">
+        <span class="glyphicon glyphicon-link"></span>
+    </a>
+</h2>
+<ol>
+    <li>
+        Navigate to Memo link with necessary parameters
+        <h5>URL</h5>
+        <pre>https://memo.cash/account/link?</pre>
+        <h5>Parameters</h5>
+        <pre>return=http://localhost:8080/request-payment-complete&
+address=12kap...&
+amount=10000</pre>
+    </li>
+    <li>
+        Click <b>Connect</b> on Memo<br>
+    </li>
+    <li>
+        Redirect request payment complete
+        <h5>URL</h5>
+        <pre>http://localhost:8080/request-payment-complete</pre>
+    </li>
+</ol>

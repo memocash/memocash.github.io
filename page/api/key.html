@@ -1,0 +1,125 @@
+<div>
+    <a class="anchor" id="api-key"></a>
+    <h2>
+        API Key
+        <a class="anchor-link" href="#api-key">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h2>
+</div>
+
+<div>
+    <a class="anchor" id="api-get-key"></a>
+    <h3>
+        Get Key
+        <a class="anchor-link" href="#api-get-key">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/api/key/get</code>
+    </p>
+    <pre>apiToken=0166e5525a96e38c0e559cef889d0f2e
+apiTempKey=a22be1903dc09e7226f3bff3274087f240a4f2bb97678e62b16ed0747aaaa788</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">{
+    "token": "0166e5525a96e38c0e559cef889d0f2e",
+    "secret": "648425dc1199e3d506c977039f10171bafd8ccee3a584276400ca8afb5e6add5",
+}</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-new-key"></a>
+    <h3>
+        New Key
+        <a class="anchor-link" href="#api-new-key">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/api/key/new</code>
+    </p>
+    <pre></pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">{
+    "token": "0166e5525a96e38c0e559cef889d0f2e",
+    "secret": "648425dc1199e3d506c977039f10171bafd8ccee3a584276400ca8afb5e6add5",
+}</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-fund-address"></a>
+    <h3>
+        Fund Address
+        <a class="anchor-link" href="#api-fund-address">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/api/fund-address</code>
+    </p>
+    <pre>apiToken=0166e5525a96e38c0e559cef889d0f2e
+apiSecret=648425dc1199e3d506c977039f10171bafd8ccee3a584276400ca8afb5e6add5</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">{
+    "token": "0166e5525a96e38c0e559cef889d0f2e",
+    "address": "1BgJrJA7FXLdTTCMWJ9oZoqJ3BZYCsetXB",
+}</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-history-funds"></a>
+    <h3>
+        History Funds
+        <a class="anchor-link" href="#api-history-funds">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/api/history/funds</code>
+    </p>
+    <pre>apiToken=0166e5525a96e38c0e559cef889d0f2e
+apiSecret=648425dc1199e3d506c977039f10171bafd8ccee3a584276400ca8afb5e6add5
+offset=0</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">[{
+    "tx_hash": "deeab96684dd8deca3cf8e63ac2bffb434fa91a1d33b97018d0dd688c83a0916",
+    "amount": "10000",
+    "date": "2020-06-04 23:54:37"
+}]</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-history-spends"></a>
+    <h3>
+        History Spends
+        <a class="anchor-link" href="#api-history-spends">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/api/history/spends</code>
+    </p>
+    <pre>apiToken=0166e5525a96e38c0e559cef889d0f2e
+apiSecret=648425dc1199e3d506c977039f10171bafd8ccee3a584276400ca8afb5e6add5
+offset=0</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">[{
+    "tx_hash": "4f4d6b5d14da755b0c7a77df112446742e5c4ba6a489766d1fd272270d960f08",
+    "amount": "262",
+    "date": "2020-06-05 00:01:41"
+}]</code></pre>
+</div>

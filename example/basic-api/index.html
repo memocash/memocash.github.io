@@ -1,0 +1,607 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memo Example - Basic API</title>
+    <script src="../../lib/jquery.min.js"></script>
+    <script src="../../lib/bootstrap.min.js"></script>
+    <script src="../../lib/jmemo.min.js"></script>
+    <script src="./basic-api.js"></script>
+    <script src="./config.js"></script>
+    <link rel="stylesheet" href="../../lib/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./basic-api.css"/>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Memo Example - Basic API</a>
+        </div>
+    </div>
+</nav>
+<div class="container main-body">
+
+    <form id="mnemonic-form" class="form-horizontal">
+        <div class="form-group row">
+            <label for="mnemonic" class="col-xs-3 col-form-label">Mnemonic</label>
+            <div class="col-xs-9">
+                <input id="mnemonic" class="form-control" type="text" name="mnemonic" value=""/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <input type="submit" id="set-mnemonic" class="btn btn-primary btn-sm" value="Reset Mnemonic"/>
+            </div>
+        </div>
+    </form>
+    <div class="row form-group">
+        <label for="main-address" class="col-xs-3">Main Address</label>
+        <div class="col-xs-9">
+            <input id="main-address" class="form-control" type="text" name="main-address" value="" readonly/>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label for="address-balance" class="col-xs-3">Address Balance</label>
+        <div class="col-xs-9">
+            <input id="address-balance" class="form-control" type="number" name="address-balance" value="" readonly/>
+        </div>
+    </div>
+    <div class="row form-group hidden">
+        <label for="slp-address" class="col-xs-3">SLP Address</label>
+        <div class="col-xs-9">
+            <input id="slp-address" class="form-control" type="text" name="slp-address" value="" readonly/>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label for="api-token" class="col-xs-3">API Token</label>
+        <div class="col-xs-9">
+            <input id="api-token" class="form-control" type="text" name="api-token" value="" readonly/>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label for="api-fund-address" class="col-xs-3">API Fund Address</label>
+        <div class="col-xs-9">
+            <input id="api-fund-address" class="form-control" type="text" name="api-fund-address" value="" readonly/>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label for="api-balance" class="col-xs-3">API Balance</label>
+        <div class="col-xs-9">
+            <input id="api-balance" class="form-control" type="number" name="api-balance" value="" readonly/>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-xs-9 col-xs-offset-3">
+            <a id="fund-api-key-link" class="btn btn-success">Get API Token (w/ Memo)</a>
+            <a id="fund-api-key-link-single" class="btn btn-primary">Get API Token (standalone)</a>
+            <a id="fund-api-key-clear" class="btn btn-default hidden">Clear API Key</a>
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#tab-post-message" aria-controls="tab-post-message" role="tab" data-toggle="tab">Post Message</a>
+        </li>
+        <li role="presentation">
+            <a href="#tab-check-link" aria-controls="tab-check-link" role="tab" data-toggle="tab">Check Link</a>
+        </li>
+        <li role="presentation">
+            <a href="#tab-link-request" aria-controls="tab-link-request" role="tab" data-toggle="tab">Link Request</a>
+        </li>
+        <li role="presentation">
+            <a href="#tab-topic-follow" aria-controls="tab-topic-follow" role="tab" data-toggle="tab">Topic Follow</a>
+        </li>
+        <li role="presentation">
+            <a href="#tab-send-tokens" aria-controls="tab-send-tokens" role="tab" data-toggle="tab">Send Tokens</a>
+        </li>
+        <li role="presentation">
+            <a href="#tab-mute-user" aria-controls="tab-mute-user" role="tab" data-toggle="tab">Mute User</a>
+        </li>
+        <li role="presentation">
+            <a href="#tab-send-funds" aria-controls="tab-send-funds" role="tab" data-toggle="tab">Send Funds</a>
+        </li>
+        <li role="presentation">
+            <a href="#tab-api-history" aria-controls="tab-api-history" role="tab" data-toggle="tab">API History</a>
+        </li>
+    </ul>
+    <br>
+
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane" id="tab-check-link">
+            <form id="check-link-request-form" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="check-link-request" class="btn btn-primary btn-sm"
+                               value="Check Link Request"/>
+                    </div>
+                </div>
+            </form>
+            <div class="row form-group">
+                <label for="link-request-tx-hash" class="col-xs-3">Link Request Tx Hash</label>
+                <div class="col-xs-9">
+                    <input id="link-request-tx-hash" class="form-control" type="text" name="link-request-tx-hash"
+                           value=""/>
+                </div>
+            </div>
+            <div class="row form-group">
+                <label for="link-request-child" class="col-xs-3">Link Request Child</label>
+                <div class="col-xs-9">
+                    <input id="link-request-child" class="form-control" type="text" name="link-request-child" value=""/>
+                </div>
+            </div>
+            <div class="row form-group">
+                <label for="link-request-message" class="col-xs-3">Link Request Message</label>
+                <div class="col-xs-9">
+                    <input id="link-request-message" class="form-control" type="text" name="link-request-message"
+                           value=""/>
+                </div>
+            </div>
+            <form id="create-link-accept-form" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="create-link-accept" class="btn btn-primary btn-sm"
+                               value="Create Link Accept"/>
+                    </div>
+                </div>
+            </form>
+            <div class="row form-group">
+                <label for="accept-unsigned-raw" class="col-xs-3">Unsigned Accept Tx Raw</label>
+                <div class="col-xs-9">
+                    <input id="accept-unsigned-raw" class="form-control" type="text" name="accept-unsigned-raw"
+                           value=""/>
+                </div>
+            </div>
+            <form id="sign-accept-form" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="sign-accept" class="btn btn-primary btn-sm" value="Sign Accept"/>
+                    </div>
+                </div>
+            </form>
+            <div class="row form-group">
+                <label for="accept-signed-raw" class="col-xs-3">Signed Accept Tx Raw</label>
+                <div class="col-xs-9">
+                    <input id="accept-signed-raw" class="form-control" type="text" name="accept-signed-raw" value=""/>
+                </div>
+            </div>
+            <form id="broadcast-signed-accept-form" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="broadcast-signed-accept" class="btn btn-primary btn-sm"
+                               value="Broadcast Signed Accept"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div role="tabpanel" class="tab-pane active" id="tab-post-message">
+            <div class="row form-group">
+                <label for="new-post-message" class="col-xs-3">New Post Message</label>
+                <div class="col-xs-9">
+                    <input id="new-post-message" class="form-control" type="text" name="new-post-message" value=""
+                           placeholder="Message"/>
+                </div>
+            </div>
+            <form id="create-post-form" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="create-post" class="btn btn-primary btn-sm" value="Create Post"/>
+                    </div>
+                </div>
+            </form>
+            <div class="row form-group">
+                <label for="post-unsigned-raw" class="col-xs-3">Unsigned Accept Tx Raw</label>
+                <div class="col-xs-9">
+                    <input id="post-unsigned-raw" class="form-control" type="text" name="post-unsigned-raw" value=""/>
+                </div>
+            </div>
+            <form id="sign-post-form" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="sign-post" class="btn btn-primary btn-sm" value="Sign Post"/>
+                    </div>
+                </div>
+            </form>
+            <div class="row form-group">
+                <label for="post-signed-raw" class="col-xs-3">Signed Post Tx Raw</label>
+                <div class="col-xs-9">
+                    <input id="post-signed-raw" class="form-control" type="text" name="post-signed-raw" value=""/>
+                </div>
+            </div>
+            <form id="broadcast-signed-post-form" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="broadcast-signed-post" class="btn btn-primary btn-sm"
+                               value="Broadcast Signed Post"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="tab-link-request">
+            <form id="create-link-request-form" class="form-horizontal">
+                <div class="row form-group">
+                    <label for="create-link-request-address" class="col-xs-3">Link Request Parent Address</label>
+                    <div class="col-xs-9">
+                        <input id="create-link-request-address" class="form-control" type="text"
+                               name="create-link-request-address" value=""/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="create-link-request-message" class="col-xs-3">Link Request Message</label>
+                    <div class="col-xs-9">
+                        <input id="create-link-request-message" class="form-control" type="text"
+                               name="create-link-request-message" value="" placeholder="Message"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="create-link-request" class="btn btn-primary btn-sm"
+                               value="Create Link Request"/>
+                    </div>
+                </div>
+            </form>
+            <div class="row form-group">
+                <label for="link-request-unsigned-raw" class="col-xs-3">Unsigned Link Request Tx Raw</label>
+                <div class="col-xs-9">
+                    <input id="link-request-unsigned-raw" class="form-control" type="text"
+                           name="link-request-unsigned-raw" value=""/>
+                </div>
+            </div>
+            <form id="sign-request-form" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="sign-request" class="btn btn-primary btn-sm" value="Sign Request"/>
+                    </div>
+                </div>
+            </form>
+            <div class="row form-group">
+                <label for="request-signed-raw" class="col-xs-3">Signed Request Tx Raw</label>
+                <div class="col-xs-9">
+                    <input id="request-signed-raw" class="form-control" type="text" name="request-signed-raw" value=""/>
+                </div>
+            </div>
+            <form id="broadcast-signed-request-form" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="broadcast-signed-request" class="btn btn-primary btn-sm"
+                               value="Broadcast Signed Request"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="tab-topic-follow">
+            <form id="create-topic-follow-form" class="form-horizontal">
+                <div class="row form-group">
+                    <label for="create-topic-follow-topic" class="col-xs-3">Topic Name</label>
+                    <div class="col-xs-9">
+                        <input id="create-topic-follow-topic" class="form-control" type="text"
+                               name="create-topic-follow-topic" value=""/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="create-topic-follow-unfollow" class="col-xs-3">Unfollow</label>
+                    <div class="col-xs-9">
+                        <input id="create-topic-follow-unfollow" type="checkbox"
+                               name="create-topic-follow-unfollow"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="create-topic-follow" class="btn btn-primary btn-sm"
+                               value="Create Topic Follow"/>
+                    </div>
+                </div>
+            </form>
+            <div class="row form-group">
+                <label for="topic-follow-unsigned-raw" class="col-xs-3">Unsigned Topic Follow Tx Raw</label>
+                <div class="col-xs-9">
+                    <input id="topic-follow-unsigned-raw" class="form-control" type="text"
+                           name="topic-follow-unsigned-raw" value=""/>
+                </div>
+            </div>
+            <form id="sign-topic-follow-form" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="sign-topic-follow" class="btn btn-primary btn-sm"
+                               value="Sign Topic Follow"/>
+                    </div>
+                </div>
+            </form>
+            <div class="row form-group">
+                <label for="topic-follow-signed-raw" class="col-xs-3">Signed Topic Follow Tx Raw</label>
+                <div class="col-xs-9">
+                    <input id="topic-follow-signed-raw" class="form-control" type="text" name="topic-follow-signed-raw"
+                           value=""/>
+                </div>
+            </div>
+            <form id="broadcast-signed-topic-follow-form" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="broadcast-signed-topic-follow" class="btn btn-primary btn-sm"
+                               value="Broadcast Signed Topic Follow"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="tab-send-tokens">
+            <form id="create-send-tokens-form" class="form-horizontal">
+                <div class="row form-group">
+                    <label for="create-send-tokens-token" class="col-xs-3">Token Hash</label>
+                    <div class="col-xs-9">
+                        <input id="create-send-tokens-token" class="form-control" type="text"
+                               name="create-send-tokens-token" value=""/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="create-send-tokens-recipient" class="col-xs-3">Recipient Address</label>
+                    <div class="col-xs-9">
+                        <input id="create-send-tokens-recipient" class="form-control" type="text"
+                               name="create-send-tokens-recipient" value=""/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="create-send-tokens-quantity" class="col-xs-3">Quantity</label>
+                    <div class="col-xs-9">
+                        <input id="create-send-tokens-quantity" class="form-control" type="number"
+                               name="create-send-tokens-quantity" value=""/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="create-send-tokens" class="btn btn-primary btn-sm"
+                               value="Create Send Tokens"/>
+                    </div>
+                </div>
+            </form>
+            <div class="row form-group">
+                <label for="send-tokens-unsigned-raw" class="col-xs-3">Unsigned Send Tokens Tx Raw</label>
+                <div class="col-xs-9">
+                    <input id="send-tokens-unsigned-raw" class="form-control" type="text"
+                           name="send-tokens-unsigned-raw" value=""/>
+                </div>
+            </div>
+            <form id="sign-send-tokens-form" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="sign-send-tokens" class="btn btn-primary btn-sm"
+                               value="Sign Send Tokens"/>
+                    </div>
+                </div>
+            </form>
+            <div class="row form-group">
+                <label for="send-tokens-signed-raw" class="col-xs-3">Signed Send Tokens Tx Raw</label>
+                <div class="col-xs-9">
+                    <input id="send-tokens-signed-raw" class="form-control" type="text" name="send-tokens-signed-raw"
+                           value=""/>
+                </div>
+            </div>
+            <form id="broadcast-signed-send-tokens-form" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="broadcast-signed-send-tokens" class="btn btn-primary btn-sm"
+                               value="Broadcast Signed Send Tokens"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="tab-mute-user">
+            <form id="create-mute-user-form" class="form-horizontal">
+                <div class="row form-group">
+                    <label for="create-mute-user-address" class="col-xs-3">User Address</label>
+                    <div class="col-xs-9">
+                        <input id="create-mute-user-address" class="form-control" type="text"
+                               name="create-mute-user-address" value=""/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="create-mute-user-unmute" class="col-xs-3">Unmute</label>
+                    <div class="col-xs-9">
+                        <input id="create-mute-user-unmute" type="checkbox"
+                               name="create-mute-user-unmute"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="create-mute-user" class="btn btn-primary btn-sm"
+                               value="Create Mute User"/>
+                    </div>
+                </div>
+            </form>
+            <div class="row form-group">
+                <label for="mute-user-unsigned-raw" class="col-xs-3">Unsigned Mute User Tx Raw</label>
+                <div class="col-xs-9">
+                    <input id="mute-user-unsigned-raw" class="form-control" type="text"
+                           name="mute-user-unsigned-raw" value=""/>
+                </div>
+            </div>
+            <form id="sign-mute-user-form" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="sign-mute-user" class="btn btn-primary btn-sm"
+                               value="Sign Mute User"/>
+                    </div>
+                </div>
+            </form>
+            <div class="row form-group">
+                <label for="mute-user-signed-raw" class="col-xs-3">Signed Mute User Tx Raw</label>
+                <div class="col-xs-9">
+                    <input id="mute-user-signed-raw" class="form-control" type="text" name="mute-user-signed-raw"
+                           value=""/>
+                </div>
+            </div>
+            <form id="broadcast-signed-mute-user-form" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="broadcast-signed-mute-user" class="btn btn-primary btn-sm"
+                               value="Broadcast Signed Mute User"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="tab-send-funds">
+            <form id="create-send-funds-form" class="form-horizontal">
+                <div class="row form-group">
+                    <label for="create-send-funds-recipient" class="col-xs-3">Recipient Address</label>
+                    <div class="col-xs-9">
+                        <input id="create-send-funds-recipient" class="form-control" type="text"
+                               name="create-send-funds-recipient" value=""/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="create-send-funds-quantity" class="col-xs-3">Quantity</label>
+                    <div class="col-xs-9">
+                        <input id="create-send-funds-quantity" class="form-control" type="number"
+                               name="create-send-funds-quantity" value=""/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="create-send-funds" class="btn btn-primary btn-sm"
+                               value="Create Send Funds"/>
+                    </div>
+                </div>
+            </form>
+            <div class="row form-group">
+                <label for="send-funds-unsigned-raw" class="col-xs-3">Unsigned Send Funds Tx Raw</label>
+                <div class="col-xs-9">
+                    <input id="send-funds-unsigned-raw" class="form-control" type="text"
+                           name="send-funds-unsigned-raw" value=""/>
+                </div>
+            </div>
+            <form id="sign-send-funds-form" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="sign-send-funds" class="btn btn-primary btn-sm"
+                               value="Sign Send Funds"/>
+                    </div>
+                </div>
+            </form>
+            <div class="row form-group">
+                <label for="send-funds-signed-raw" class="col-xs-3">Signed Send Funds Tx Raw</label>
+                <div class="col-xs-9">
+                    <input id="send-funds-signed-raw" class="form-control" type="text" name="send-funds-signed-raw"
+                           value=""/>
+                </div>
+            </div>
+            <form id="broadcast-signed-send-funds-form" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="broadcast-signed-send-funds" class="btn btn-primary btn-sm"
+                               value="Broadcast Signed Send Funds"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="tab-api-history">
+            <form id="get-api-history-funds-form" class="form-horizontal">
+                <div class="row form-group">
+                    <label for="get-api-history-funds-offset" class="col-xs-3">Offset</label>
+                    <div class="col-xs-9">
+                        <input id="get-api-history-funds-offset" class="form-control" type="number"
+                               name="offset" value="" placeholder="0"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="get-api-history-funds" class="btn btn-primary btn-sm"
+                               value="Get API History Funds"/>
+                    </div>
+                </div>
+            </form>
+            <form id="get-api-history-spends-form" class="form-horizontal">
+                <div class="row form-group">
+                    <label for="get-api-history-spends-offset" class="col-xs-3">Offset</label>
+                    <div class="col-xs-9">
+                        <input id="get-api-history-spends-offset" class="form-control" type="number"
+                               name="offset" value="" placeholder="0"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" id="get-api-history-spends" class="btn btn-primary btn-sm"
+                               value="Get API History Spends"/>
+                    </div>
+                </div>
+            </form>
+            <div id="get-api-history-output"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function () {
+        var $mnemonic = $("#mnemonic");
+        var $mainAddress = $("#main-address");
+        var $linkRequestTxHash = $("#link-request-tx-hash");
+        var $acceptUnsignedRaw = $("#accept-unsigned-raw");
+        var $acceptSignedRaw = $("#accept-signed-raw");
+        var $postUnsignedRaw = $("#post-unsigned-raw");
+        var $postSignedRaw = $("#post-signed-raw");
+        var $linkRequestUnsignedRaw = $("#link-request-unsigned-raw");
+        var $requestSignedRaw = $("#request-signed-raw");
+        var $topicFollowUnsignedRaw = $("#topic-follow-unsigned-raw");
+        var $topicFollowSignedRaw = $("#topic-follow-signed-raw");
+        var $sendTokensUnsignedRaw = $("#send-tokens-unsigned-raw");
+        var $sendTokensSignedRaw = $("#send-tokens-signed-raw");
+        var $muteUserUnsignedRaw = $("#mute-user-unsigned-raw");
+        var $muteUserSignedRaw = $("#mute-user-signed-raw");
+        var $sendFundsUnsignedRaw = $("#send-funds-unsigned-raw");
+        var $sendFundsSignedRaw = $("#send-funds-signed-raw");
+        var $apiHistoryOutput = $("#get-api-history-output");
+
+        ExampleParentKey.SetMnemonic($("#mnemonic-form"), $mnemonic, $mainAddress, $("#slp-address"));
+        ExampleParentKey.Init($mainAddress.val(), $("#api-token"), $("#api-balance"), $("#api-fund-address"), $("#address-balance"), $("#fund-api-key-link"), $("#fund-api-key-link-single"), $("#fund-api-key-clear"));
+        ExampleParentKey.CheckLinkRequest($("#check-link-request-form"), $mainAddress, $linkRequestTxHash, $("#link-request-child"), $("#link-request-message"));
+        ExampleParentKey.CreateLinkAccept($("#create-link-accept-form"), $linkRequestTxHash, $acceptUnsignedRaw);
+        ExampleParentKey.SignAccept($("#sign-accept-form"), $mnemonic, $acceptUnsignedRaw, $acceptSignedRaw);
+        ExampleParentKey.BroadcastSigned($("#broadcast-signed-accept-form"), $acceptSignedRaw);
+
+        ExampleParentKey.CreatePost($("#create-post-form"), $mainAddress, $("#new-post-message"), $postUnsignedRaw);
+        ExampleParentKey.SignTxForm($("#sign-post-form"), $mnemonic, $postUnsignedRaw, $postSignedRaw, "Post");
+        ExampleParentKey.BroadcastSigned($("#broadcast-signed-post-form"), $postSignedRaw);
+
+        ExampleParentKey.CreateLinkRequest($("#create-link-request-form"), $mainAddress, $("#create-link-request-address"), $("#create-link-request-message"), $linkRequestUnsignedRaw);
+        ExampleParentKey.SignTxForm($("#sign-request-form"), $mnemonic, $linkRequestUnsignedRaw, $requestSignedRaw, "LinkRequest");
+        ExampleParentKey.BroadcastSigned($("#broadcast-signed-request-form"), $requestSignedRaw);
+
+        ExampleParentKey.CreateTopicFollow($("#create-topic-follow-form"), $mainAddress, $("#create-topic-follow-topic"), $("#create-topic-follow-unfollow"), $topicFollowUnsignedRaw);
+        ExampleParentKey.SignTxForm($("#sign-topic-follow-form"), $mnemonic, $topicFollowUnsignedRaw, $topicFollowSignedRaw, "TopicFollow");
+        ExampleParentKey.BroadcastSigned($("#broadcast-signed-topic-follow-form"), $topicFollowSignedRaw);
+
+        ExampleParentKey.CreateSendTokens($("#create-send-tokens-form"), $mainAddress, $("#create-send-tokens-token"), $("#create-send-tokens-recipient"), $("#create-send-tokens-quantity"), $sendTokensUnsignedRaw);
+        ExampleParentKey.SignTxForm($("#sign-send-tokens-form"), $mnemonic, $sendTokensUnsignedRaw, $sendTokensSignedRaw, "SendTokens");
+        ExampleParentKey.BroadcastSigned($("#broadcast-signed-send-tokens-form"), $sendTokensSignedRaw);
+
+        ExampleParentKey.CreateMuteUser($("#create-mute-user-form"), $mainAddress, $("#create-mute-user-address"), $("#create-mute-user-unmute"), $muteUserUnsignedRaw);
+        ExampleParentKey.SignTxForm($("#sign-mute-user-form"), $mnemonic, $muteUserUnsignedRaw, $muteUserSignedRaw, "MuteUser");
+        ExampleParentKey.BroadcastSigned($("#broadcast-signed-mute-user-form"), $muteUserSignedRaw);
+
+        ExampleParentKey.CreateSendFunds($("#create-send-funds-form"), $mainAddress, $("#create-send-funds-recipient"), $("#create-send-funds-quantity"), $sendFundsUnsignedRaw);
+        ExampleParentKey.SignTxForm($("#sign-send-funds-form"), $mnemonic, $sendFundsUnsignedRaw, $sendFundsSignedRaw, "SendFunds");
+        ExampleParentKey.BroadcastSigned($("#broadcast-signed-send-funds-form"), $sendFundsSignedRaw);
+
+        ExampleParentKey.GetApiHistoryFunds($("#get-api-history-funds-form"), $apiHistoryOutput);
+        ExampleParentKey.GetApiHistorySpends($("#get-api-history-spends-form"), $apiHistoryOutput);
+    })();
+</script>
+
+<div class="row">
+    <div class="col-xs-12 footer">
+        <hr/>
+        <p>
+            &copy; Memo Technology, Inc &middot; All Rights Reserved
+        </p>
+        <p>
+            <a href="../../#examples">Docs</a>
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<div>
+    <a class="anchor" id="api-post"></a>
+    <h2>
+        Post
+        <a class="anchor-link" href="#api-post">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h2>
+
+</div>
+
+<div>
+    <a class="anchor" id="api-post-topic"></a>
+    <h3>
+        Topic
+        <a class="anchor-link" href="#api-post-topic">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/post/topic</code>
+    </p>
+    <pre>topic=test
+modAddresses[]=15w9TL4vPFe13sQ5f4YnWbARjdqjoiZT4e
+offset=0</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">[{
+    "tx_hash": "dc04902b04ce051948beacbb2740d9a80b3ccfd8d088b67833159268400bb8ef",
+    "name": "15w9TL4vPFe13sQ5",
+    "alias": "18UhA8"
+    "message": "Test",
+    "topic": "test",
+    "date": "2020-06-05 00:01:39",
+    "likes": 1,
+    "tip": 2500,
+    "replies": 1
+}]</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-post-replies"></a>
+    <h3>
+        Replies
+        <a class="anchor-link" href="#api-post-replies">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/post/replies</code>
+    </p>
+    <pre>txHash=dc04902b04ce051948beacbb2740d9a80b3ccfd8d088b67833159268400bb8ef
+modAddresses[]=15w9TL4vPFe13sQ5f4YnWbARjdqjoiZT4e
+offset=0</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">[{
+    "tx_hash": "72c0fc17baa942cd4d0234b9101e40e3a55540447a330155f4683f6b24397f48",
+    "name": "12FtodbaKJ2xRMi5",
+    "alias": ""
+    "message": "Test reply",
+    "topic": "",
+    "date": "2020-06-05 19:36:03",
+    "likes": 0,
+    "tip": 0,
+    "replies": 0
+}]</code></pre>
+</div>

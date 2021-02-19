@@ -1,0 +1,83 @@
+<div>
+    <a class="anchor" id="api-user"></a>
+    <h2>
+        User
+        <a class="anchor-link" href="#api-user">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h2>
+</div>
+
+<div>
+    <a class="anchor" id="api-user-balance"></a>
+    <h3>
+        Balance
+        <a class="anchor-link" href="#api-user-balance">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/user/balance</code>
+    </p>
+    <pre>address=15w9TL4vPFe13sQ5f4YnWbARjdqjoiZT4e
+apiToken=0166e5525a96e38c0e559cef889d0f2e
+apiSecret=648425dc1199e3d506c977039f10171bafd8ccee3a584276400ca8afb5e6add5</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">{
+    "address": "15w9TL4vPFe13sQ5f4YnWbARjdqjoiZT4e",
+    "balance": 999000,
+    "api_token": "0166e5525a96e38c0e559cef889d0f2e",
+    "api_address": "1BgJrJA7FXLdTTCMWJ9oZoqJ3BZYCsetXB",
+    "api_balance": 9238
+}</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-user-id"></a>
+    <h3>
+        Id
+        <a class="anchor-link" href="#api-user-id">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/user/id</code>
+    </p>
+    <pre>address=18UhA8Lbt4qAABS1LZD9vzF5qBPMpaoAhn</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">{
+    "address": "18UhA8Lbt4qAABS1LZD9vzF5qBPMpaoAhn",
+    "has_id": true,
+    "revoked": false,
+    "parent": "15w9TL4vPFe13sQ5f4YnWbARjdqjoiZT4e",
+    "alias": "Main"
+}</code></pre>
+</div>
+
+<br>
+
+<div>
+    <a class="anchor" id="api-user-link-requests"></a>
+    <h3>
+        Link Requests
+        <a class="anchor-link" href="#api-user-link-requests">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </h3>
+    <h4>Request</h4>
+    <p>
+        <b>POST</b> <code>/user/link-requests</code>
+    </p>
+    <pre>address=15w9TL4vPFe13sQ5f4YnWbARjdqjoiZT4e</pre>
+    <h4>Response</h4>
+    <pre><code class="language-json">[{
+    "tx_hash": "be22a266dd3ea3ac014ff8455e56ba2c65332047f70990db28e11842dd507100",
+    "message": "",
+    "child_address": "18UhA8Lbt4qAABS1LZD9vzF5qBPMpaoAhn",
+    "parent_address": "15w9TL4vPFe13sQ5f4YnWbARjdqjoiZT4e"
+}]</code></pre>
+</div>
