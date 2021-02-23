@@ -62,6 +62,16 @@ ExampleComments.API = {};
                 location.href = location.href.split("?")[0];
                 return;
             }
+            var text = "" +
+                "<p>" +
+                "Please wait. " +
+                "This process may take awhile. " +
+                "Refreshing the page will interrupt the process." +
+                "</p>" +
+                "<p class='loading'>" +
+                "<span class='glyphicon glyphicon-refresh spinning'></span>" +
+                "</p>";
+            ExampleComments.Modal.Main("Connecting Account...", text, 8, false);
             tempKeyCheck.LinkRequest(function () {
                 tempKeyCheck.FinishAccept(function () {
                     // After connection
