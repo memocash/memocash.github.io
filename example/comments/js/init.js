@@ -2,7 +2,7 @@ var ExampleComments = {
     Helper: {},
     Const: {
         ModAddresses: ["1QCBiyfwdjXDsHghBEr5U2KxUpM2BmmJVt"],
-        WebHost: "https://beta.memo.cash",
+        WebHost: "https://memo.cash",
         ApiHost: "https://beta-api.memo.cash"
     }
 };
