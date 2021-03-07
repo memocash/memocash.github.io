@@ -117,7 +117,7 @@ CommentsTempKeyCheck.prototype.GetKey = function (done, errCb) {
 CommentsTempKeyCheck.prototype.LinkRequest = function (done, errCb) {
     var self = this;
     if (!localStorage.ApiToken) {
-        alert("Error API token not set. Please try again.");
+        ExampleComments.User.LoadInfoModal("Error API token not set. Please try again.", "danger");
         return;
     }
     jmemo.Client.Link.CreateRequest(localStorage.ApiToken, localStorage.ApiSecret, this.address, this.parentAddress,

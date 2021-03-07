@@ -39,7 +39,7 @@ ExampleComments.Posts = {};
         $(".like-form").submit(function (e) {
             e.preventDefault();
             if (!localStorage.ApiToken) {
-                alert("Error API token not set. Please link Memo account.");
+                ExampleComments.User.LoadInfoModal("Please connect Memo account.", "danger");
                 return;
             }
             var address = ExampleComments.User.GetMainAddress();
@@ -97,7 +97,7 @@ ExampleComments.Posts = {};
             var address = ExampleComments.User.GetMainAddress();
             var comment = $comment.val();
             if (!localStorage.ApiToken) {
-                alert("Error API token not set. Please link Memo account.");
+                ExampleComments.User.LoadInfoModal("Please connect Memo account.", "danger");
                 return;
             }
             jmemo.Client.Topic.CreatePost(localStorage.ApiToken, localStorage.ApiSecret, address, TestTopic, comment, ExampleComments.Tx.GetSignHandler(function () {
