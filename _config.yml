@@ -1,0 +1,12 @@
+title: Memo Documentation
+description: Documentation for Memo API and interaction using JMemo JavaScript library
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - README.md
+
+# Use raw HTML markup; don't auto-generate IDs that conflict with our anchor scheme
+kramdown:
+  auto_ids: false

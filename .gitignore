@@ -2,3 +2,10 @@
 /doc.tar.gz
 /example/comments/config.js
 /example/basic-api/config.js
+/.idea
+
+# Jekyll
+/_site/
+/.jekyll-cache/
+/.jekyll-metadata
+/vendor/
