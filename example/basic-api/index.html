@@ -1,28 +1,17 @@
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memo Example - Basic API</title>
-    <script src="../../lib/jquery.min.js"></script>
-    <script src="../../lib/bootstrap.min.js"></script>
-    <script src="../../lib/jmemo.min.js"></script>
-    <script src="./basic-api.js"></script>
-    <script src="./config.js"></script>
-    <link rel="stylesheet" href="../../lib/bootstrap.min.css"/>
-    <link rel="stylesheet" href="./basic-api.css"/>
-</head>
-<body>
+---
+layout: default
+title: Basic API Example
+permalink: /example/basic-api/
+section: examples
+---
+<link rel="stylesheet" href="{{ '/example/basic-api/basic-api.css' | relative_url }}"/>
+<script src="{{ '/lib/jmemo.min.js' | relative_url }}"></script>
+<script src="{{ '/example/basic-api/basic-api.js' | relative_url }}"></script>
+<script src="{{ '/example/basic-api/config.js' | relative_url }}"></script>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Memo Example - Basic API</a>
-        </div>
-    </div>
-</nav>
-<div class="container main-body">
+<h1 class="page-header">Basic API Example</h1>
 
-    <form id="mnemonic-form" class="form-horizontal">
+<form id="mnemonic-form" class="form-horizontal">
         <div class="form-group row">
             <label for="mnemonic" class="col-xs-3 col-form-label">Mnemonic</label>
             <div class="col-xs-9">
@@ -533,7 +522,7 @@
             <div id="get-api-history-output"></div>
         </div>
     </div>
-</div>
+
 <script>
     (function () {
         var $mnemonic = $("#mnemonic");
@@ -590,18 +579,3 @@
         ExampleParentKey.GetApiHistorySpends($("#get-api-history-spends-form"), $apiHistoryOutput);
     })();
 </script>
-
-<div class="row">
-    <div class="col-xs-12 footer">
-        <hr/>
-        <p>
-            &copy; Memo Technology, Inc &middot; All Rights Reserved
-        </p>
-        <p>
-            <a href="../../#examples">Docs</a>
-        </p>
-    </div>
-</div>
-
-</body>
-</html>

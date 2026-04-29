@@ -1,13 +1,5 @@
-body {
-    padding-top: 50px;
-}
-
 a {
     cursor: pointer;
-}
-
-.main-body {
-    padding-top: 40px;
 }
 
 .inline {
@@ -34,14 +26,6 @@ form.inline {
 #inner-site-wrapper {
     position: relative;
     height: 100%;
-}
-
-#inner-site-wrapper .site-header-spacer {
-    height: 60px;
-}
-
-body.mobile-app #inner-site-wrapper .site-header-spacer {
-    height: 5px;
 }
 
 #site-wrapper-cover.active {
@@ -130,11 +114,6 @@ body.mobile-app #inner-site-wrapper .site-header-spacer {
 
 .reply-container .panel.panel-default {
     margin: 20px -10px 0 0;
-}
-
-.footer {
-    text-align: center;
-    color: #888;
 }
 
 .loading {
