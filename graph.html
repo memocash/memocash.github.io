@@ -1,0 +1,337 @@
+---
+layout: default
+title: Graph
+permalink: /graph/
+section: graph
+---
+<h1 class="page-header">Graph</h1>
+<p>
+    <code>graph.cash</code> is a GraphQL indexer for the Memo network.
+    It exposes posts, profiles, transactions, blocks, and SLP token data through queries and live subscriptions.
+</p>
+<ul>
+    <li><a href="#graph-endpoint">Endpoint</a></li>
+    <li><a href="#graph-schema">Schema</a></li>
+    <li><a href="#graph-queries">Queries</a></li>
+    <li><a href="#graph-subscriptions">Subscriptions</a></li>
+    <li><a href="#graph-mutations">Mutations</a></li>
+    <li><a href="#graph-scalars">Scalars</a></li>
+</ul>
+<br>
+
+<a class="anchor" id="graph-endpoint"></a>
+<h2>
+    Endpoint
+    <a class="anchor-link" href="#graph-endpoint">
+        <span class="glyphicon glyphicon-link"></span>
+    </a>
+</h2>
+<p>
+    The endpoint accepts <code>POST</code> for queries and mutations, and a WebSocket upgrade for subscriptions.
+</p>
+<h4>HTTP</h4>
+<pre>https://graph.cash/graphql</pre>
+<h4>WebSocket</h4>
+<pre>wss://graph.cash/graphql</pre>
+<p>
+    Subscriptions follow the
+    <a href="https://github.com/enisdenjo/graphql-ws/blob/master/PROTOCOL.md">graphql-transport-ws</a>
+    protocol.
+    A live playground with introspection is available for development.
+</p>
+
+<br>
+
+<a class="anchor" id="graph-schema"></a>
+<h2>
+    Schema
+    <a class="anchor-link" href="#graph-schema">
+        <span class="glyphicon glyphicon-link"></span>
+    </a>
+</h2>
+<p>
+    Top-level types and the operations that return them.
+</p>
+<pre><code class="language-graphql">type Query {
+    tx(hash: Hash!): Tx
+    txs(hashes: [Hash!]): [Tx]
+    address(address: Address!): Lock
+    addresses(addresses: [Address!]): [Lock]
+    block(hash: Hash!): Block
+    block_by_height(height: Int!): Block
+    block_newest: Block
+    blocks(newest: Boolean, start: Uint32): [Block!]
+    profiles(addresses: [Address!]): [Profile]
+    posts(txHashes: [Hash!]): [Post]
+    posts_newest(start: Date, tx: Hash, limit: Uint32): [Post]
+    room(name: String!): Room!
+}
+
+type Subscription {
+    tx(hash: Hash!): Tx
+    address(address: Address!): Tx
+    addresses(addresses: [Address!]): Tx
+    blocks: Block
+    posts(hashes: [Hash!]): Post
+    profiles(addresses: [Address!]): Profile
+    rooms(names: [String!]): Post
+    room_follows(addresses: [Address!]): RoomFollow
+}
+
+type Mutation {
+    broadcast(raw: String!): Boolean!
+}</code></pre>
+<p>
+    Selected object types most relevant for building feeds and profile views:
+</p>
+<pre><code class="language-graphql">type Post {
+    tx_hash: Hash!
+    address: Address!
+    text: String!
+    tx: Tx!
+    lock: Lock!
+    likes: [Like!]
+    parent: Post
+    replies: [Post!]
+    room: Room
+}
+
+type Profile {
+    address: Address!
+    lock: Lock!
+    name: SetName
+    profile: SetProfile
+    pic: SetPic
+    following(start: Date): [Follow]
+    followers(start: Date): [Follow]
+    posts(start: Date, newest: Boolean): [Post]
+    rooms(start: Date): [RoomFollow!]
+}
+
+type Lock {
+    address: Address
+    profile: Profile
+    txs(start: Date, tx: Hash, limit: Uint32): [Tx!]
+}
+
+type Tx {
+    hash: Hash!
+    raw: Bytes!
+    inputs: [TxInput!]!
+    outputs: [TxOutput!]!
+    blocks: [TxBlock]
+    seen: Date
+    version: Int32!
+    locktime: Uint32!
+}
+
+type Room {
+    name: String!
+    posts(start: Int): [Post!]
+    followers(start: Int): [RoomFollow!]
+}</code></pre>
+
+<br>
+
+<a class="anchor" id="graph-queries"></a>
+<h2>
+    Queries
+    <a class="anchor-link" href="#graph-queries">
+        <span class="glyphicon glyphicon-link"></span>
+    </a>
+</h2>
+
+<h3>Newest posts</h3>
+<p>
+    Page through recent posts. Pass <code>tx</code> with the oldest post's hash from the previous page to paginate.
+</p>
+<pre><code class="language-graphql">query Newest($limit: Uint32) {
+  posts_newest(limit: $limit) {
+    tx_hash
+    text
+    address
+    tx { seen }
+    lock { profile { name { name } } }
+    room { name }
+  }
+}</code></pre>
+
+<h3>Single post and replies</h3>
+<pre><code class="language-graphql">query Post($hash: Hash!) {
+  posts(txHashes: [$hash]) {
+    tx_hash
+    text
+    address
+    likes { address tip }
+    replies {
+      tx_hash
+      text
+      address
+    }
+  }
+}</code></pre>
+
+<h3>Profile with recent posts</h3>
+<pre><code class="language-graphql">query Profile($address: Address!) {
+  profiles(addresses: [$address]) {
+    address
+    name { name }
+    profile { text }
+    pic { pic }
+    posts(newest: true) {
+      tx_hash
+      text
+      tx { seen }
+    }
+  }
+}</code></pre>
+
+<h3>Address transactions</h3>
+<pre><code class="language-graphql">query AddressTxs($address: Address!) {
+  address(address: $address) {
+    txs(limit: 25) {
+      hash
+      seen
+      outputs { amount lock { address } }
+    }
+  }
+}</code></pre>
+
+<h3>Calling from JavaScript</h3>
+<pre><code class="language-javascript">async function graphql(query, variables) {
+    const res = await fetch("https://graph.cash/graphql", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({query, variables})
+    });
+    const json = await res.json();
+    if (json.errors) {
+        console.error(json.errors);
+    }
+    return json.data;
+}</code></pre>
+
+<br>
+
+<a class="anchor" id="graph-subscriptions"></a>
+<h2>
+    Subscriptions
+    <a class="anchor-link" href="#graph-subscriptions">
+        <span class="glyphicon glyphicon-link"></span>
+    </a>
+</h2>
+<p>
+    Subscriptions stream new events as they are indexed. Pass an empty list to <code>posts(hashes: [])</code>
+    to receive every new post on the network; pass specific hashes to receive replies and likes for those posts.
+</p>
+
+<h3>All new posts</h3>
+<pre><code class="language-graphql">subscription {
+  posts(hashes: []) {
+    tx_hash
+    text
+    address
+    tx { seen }
+    lock { profile { name { name } } }
+    room { name }
+  }
+}</code></pre>
+
+<h3>Replies and likes for specific posts</h3>
+<pre><code class="language-graphql">subscription Watch($hashes: [Hash!]) {
+  posts(hashes: $hashes) {
+    tx_hash
+    text
+    parent { tx_hash }
+    likes { address tip }
+  }
+}</code></pre>
+
+<h3>Address activity</h3>
+<pre><code class="language-graphql">subscription Activity($address: Address!) {
+  address(address: $address) {
+    hash
+    seen
+  }
+}</code></pre>
+
+<h3>New blocks</h3>
+<pre><code class="language-graphql">subscription {
+  blocks {
+    hash
+    height
+    timestamp
+  }
+}</code></pre>
+
+<h3>Connecting from JavaScript</h3>
+<p>
+    Subscriptions use the <code>graphql-transport-ws</code> sub-protocol over a WebSocket.
+    The minimum handshake is <code>connection_init</code> &rarr; <code>connection_ack</code>, then
+    <code>subscribe</code> for each subscription, and <code>next</code> messages stream back.
+</p>
+<pre><code class="language-javascript">const ws = new WebSocket("wss://graph.cash/graphql", "graphql-transport-ws");
+
+ws.onopen = () =&gt; {
+    ws.send(JSON.stringify({type: "connection_init"}));
+};
+
+ws.onmessage = (event) =&gt; {
+    const msg = JSON.parse(event.data);
+    if (msg.type === "connection_ack") {
+        ws.send(JSON.stringify({
+            id: "1",
+            type: "subscribe",
+            payload: {
+                query: "subscription { posts(hashes: []) { tx_hash text address } }"
+            }
+        }));
+    } else if (msg.type === "next") {
+        console.log("new post", msg.payload.data.posts);
+    } else if (msg.type === "ping") {
+        ws.send(JSON.stringify({type: "pong"}));
+    }
+};</code></pre>
+
+<br>
+
+<a class="anchor" id="graph-mutations"></a>
+<h2>
+    Mutations
+    <a class="anchor-link" href="#graph-mutations">
+        <span class="glyphicon glyphicon-link"></span>
+    </a>
+</h2>
+<p>
+    The graph supports broadcasting raw transactions. Sign the transaction client-side (for example with
+    <a href="#jmemo">JMemo</a>) and submit the hex-encoded raw transaction:
+</p>
+<pre><code class="language-graphql">mutation Broadcast($raw: String!) {
+  broadcast(raw: $raw)
+}</code></pre>
+
+<br>
+
+<a class="anchor" id="graph-scalars"></a>
+<h2>
+    Scalars
+    <a class="anchor-link" href="#graph-scalars">
+        <span class="glyphicon glyphicon-link"></span>
+    </a>
+</h2>
+<ul>
+    <li><code>Hash</code> &mdash; 32-byte transaction or block hash, hex-encoded.</li>
+    <li><code>Address</code> &mdash; Bitcoin Cash address (legacy <code>1...</code> form).</li>
+    <li><code>Bytes</code> &mdash; arbitrary byte sequence, hex-encoded.</li>
+    <li><code>Date</code> &mdash; RFC&nbsp;3339 timestamp.</li>
+    <li><code>Int32</code>, <code>Int64</code>, <code>Uint8</code>, <code>Uint32</code>, <code>Uint64</code> &mdash; sized integers.</li>
+    <li><code>HashIndex</code> &mdash; transaction hash + output index pair.</li>
+</ul>
+
+<br>
+
+<h2>Live example</h2>
+<p>
+    See the <a href="{{ '/example/posts-feed/' | relative_url }}">posts feed example</a> for a self-contained page that
+    renders the live posts subscription and paginates with <code>posts_newest</code>.
+</p>

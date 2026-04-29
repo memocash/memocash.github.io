@@ -1,0 +1,25 @@
+---
+layout: default
+title: Posts Feed Example
+permalink: /example/posts-feed/
+section: examples
+---
+<link rel="stylesheet" href="{{ '/example/posts-feed/posts-feed.css' | relative_url }}"/>
+<script src="{{ '/example/posts-feed/posts-feed.js' | relative_url }}"></script>
+
+<h1 class="page-header">
+    Posts Feed
+    <small id="connection-status" class="connecting">Connecting...</small>
+</h1>
+<p>
+    Live feed of new posts from the Memo network.
+    Recent posts are loaded with the <code>posts_newest</code> query and new posts stream in via the <code>posts</code> subscription.
+    See the <a href="{{ '/graph/' | relative_url }}">Graph documentation</a> for details.
+</p>
+<div id="posts"></div>
+<p>
+    <button id="load-more" class="btn btn-default btn-sm">Load older</button>
+</p>
+<script>
+    PostsFeed.Init();
+</script>

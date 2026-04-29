@@ -12,6 +12,9 @@ section: examples
     <li>
         <a href="#examples-comments">Comments</a>
     </li>
+    <li>
+        <a href="#examples-posts-feed">Posts Feed</a>
+    </li>
 </ul>
 <br>
 
@@ -46,4 +49,23 @@ section: examples
 </p>
 <p>
     <a href="{{ '/example/comments/' | relative_url }}">example/comments</a>
+</p>
+
+<br>
+
+<a class="anchor" id="examples-posts-feed"></a>
+<h2>
+    Posts Feed
+    <a class="anchor-link" href="#examples-posts-feed">
+        <span class="glyphicon glyphicon-link"></span>
+    </a>
+</h2>
+<p>
+    Live feed of new posts from the Memo network using the
+    <a href="{{ '/graph/' | relative_url }}">Graph</a> GraphQL indexer.
+    Recent posts are loaded with the <code>posts_newest</code> query and new posts stream in via the
+    <code>posts</code> subscription over WebSocket.
+</p>
+<p>
+    <a href="{{ '/example/posts-feed/' | relative_url }}">example/posts-feed</a>
 </p>

@@ -1,0 +1,44 @@
+.post {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    background: #fff;
+}
+
+.post.post-new {
+    background: #fffbe6;
+    transition: background 2s ease-in-out;
+}
+
+.post-meta {
+    color: #888;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.post-meta a {
+    color: #555;
+}
+
+.post-text {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+#connection-status {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+#connection-status.connected {
+    color: #5cb85c;
+}
+
+#connection-status.disconnected {
+    color: #d9534f;
+}
+
+#connection-status.connecting {
+    color: #f0ad4e;
+}
